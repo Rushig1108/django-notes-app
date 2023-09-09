@@ -19,7 +19,7 @@ pipeline {
             steps {
                 script {
                     def version = sh(script: 'echo $BUILD_NUMBER', returnStdout: true).trim()
-                    def dockerImage = djangoapp:${version}"
+                    def dockerImage = "djangoapp:${version}"
 
                     // Push the Docker image to a registry (replace myregistry with your registry URL)
                     sh "docker push rushigunjal1108/${dockerImage}"
