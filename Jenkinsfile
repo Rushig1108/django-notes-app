@@ -30,11 +30,7 @@ pipeline {
         stage('Deploy to Kubernetes') {
             steps {
                 script {
-                    def version = sh(script: 'echo $BUILD_NUMBER', returnStdout: true).trim()
-                    def dockerImage = "djangoapp:${version}"
-
-                    // Deploy to Kubernetes using kubectl
-                    sh "kubectl apply -f k8s-deployment.yaml --record=true --set=image=${dockerImage}"
+                    kubernetesDeploy (configs: 'k8s-deployment.yaml', kubeconfigId: 'kubeconfig')
                 }
             }
         }
